@@ -2,7 +2,7 @@ from sys import argv
 
 
 class Configuration(object):
-    headless = False
+    headless = True
     driver = "chrome"
     executable_path = "driver/chromedriver"
 
