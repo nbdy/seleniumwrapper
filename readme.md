@@ -1,5 +1,5 @@
 ## seleniumwrapper
-[![Build Status](http://build.eberlein.io:8080/job/seleniumwrapper/badge/icon)](http://build.eberlein.io:8080/job/seleniumwrapper/)<br>
+[![Build Status](http://build.eberlein.io:8080/job/python_seleniumwrapper/badge/icon)](http://build.eberlein.io:8080/job/python_seleniumwrapper/)<br>
 
 downloads selenium webdrivers<br>
 and offers an easier interface
