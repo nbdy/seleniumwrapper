@@ -11,10 +11,10 @@ class WebDriver(object):
         o = None
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
             d = web.Firefox
-            o = web.firefox.options.Options()
+            o = web.FirefoxOptions
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             d = web.Chrome
-            o = web.chrome.options.Options()
+            o = web.ChromeOptions
 
         o.headless = cfg.headless
         return d(cfg.executable_path, options=o)
