@@ -11,10 +11,11 @@ class Loader(object):
         windows = None
         mac = None
 
+    # https://chromedriver.storage.googleapis.com/index.html
     class Chrome(WebDriver):
-        linux = "https://chromedriver.storage.googleapis.com/76.0.3809.126/chromedriver_linux64.zip"
-        windows = "https://chromedriver.storage.googleapis.com/76.0.3809.126/chromedriver_win32.zip"
-        mac = "https://chromedriver.storage.googleapis.com/76.0.3809.126/chromedriver_mac64.zip"
+        linux = "https://chromedriver.storage.googleapis.com/80.0.3987.16/chromedriver_linux64.zip"
+        windows = "https://chromedriver.storage.googleapis.com/80.0.3987.16/chromedriver_win32.zip"
+        mac = "https://chromedriver.storage.googleapis.com/80.0.3987.16/chromedriver_mac64.zip"
 
     drivers = [Chrome]
 

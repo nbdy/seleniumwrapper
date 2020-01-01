@@ -1,11 +1,12 @@
 from sys import argv
 from user_agent import generate_navigator_js
+from os import getcwd
 
 
 class Configuration(object):
     headless = True
     driver = "chrome"
-    executable_path = "driver/chromedriver"
+    executable_path = getcwd() + "/" + "driver/chromedriver"
     user_agent = generate_navigator_js()
 
     @staticmethod
