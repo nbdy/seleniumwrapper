@@ -17,4 +17,6 @@ class WebDriver(object):
             o = web.ChromeOptions()
 
         o.headless = cfg.headless
+        o.add_argument("user_agent=%s" % cfg.user_agent)
+        print(cfg.__dict__)
         return d(cfg.executable_path, options=o)
