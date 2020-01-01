@@ -9,5 +9,5 @@ seleniumwrapper.main()
 # creates ./driver/{driver}
 ```
 
-you can get a prebuild egg [here](http://build.eberlein.io:8080/job/seleniumwrapper/lastSuccessfulBuild/artifact/dist/)
+you can get a prebuild egg/wheel [here](http://build.eberlein.io:8080/job/python_seleniumwrapper/lastSuccessfulBuild/artifact/dist/)
 
