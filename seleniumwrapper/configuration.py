@@ -1,10 +1,14 @@
 from sys import argv
+from user_agent import generate_navigator_js
+
+from seleniumwrapper.webdriver import WebDriver
 
 
 class Configuration(object):
     headless = True
     driver = "chrome"
     executable_path = "driver/chromedriver"
+    user_agent = generate_navigator_js()
 
     @staticmethod
     def help():
@@ -17,6 +21,8 @@ class Configuration(object):
         print("\t\tdefault:", Configuration.executable_path)
         print("\t--headless\trun browser headless")
         print("\t\tpossible arguments: none")
+        print("\t-u\t--user-agent\tuser-agent to use")
+        print("\t\tdefault: random js navigator")
         exit()
 
     class UnexpectedArgumentException(Exception):
@@ -41,5 +47,10 @@ class Configuration(object):
                 c.driver = argv[i + 1]
             elif a in ["--headless"]:
                 c.headless = True
+            elif a in ["-u", "--user-agent"]:
+                c.user_agent = argv[i + 1]
             i += 1
         return c
+
+    def build(self):
+        return WebDriver.build(self)
