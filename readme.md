@@ -4,11 +4,11 @@
 downloads drivers<br>
 and offers an easier interface
 ```python
-from seleniumwrapper import Configuration, fetch
+from seleniumwrapper import Configuration, fetch, WebDriver
 fetch()  # currently only fetches the chromium webdriver
 cfg = Configuration()
 cfg.headless = True
-driver = cfg.build()
+driver = WebDriver.build(cfg)
 driver.get("https://google.com")
 print(driver.title)
 ```

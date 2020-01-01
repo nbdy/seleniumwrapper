@@ -1,8 +1,6 @@
 from sys import argv
 from user_agent import generate_navigator_js
 
-from seleniumwrapper.webdriver import WebDriver
-
 
 class Configuration(object):
     headless = True
@@ -51,6 +49,3 @@ class Configuration(object):
                 c.user_agent = argv[i + 1]
             i += 1
         return c
-
-    def build(self):
-        return WebDriver.build(self)
