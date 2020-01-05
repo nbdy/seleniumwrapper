@@ -60,7 +60,6 @@ class WebDriver(object):
                 print("created directory '{0}'".format(path))
         z = url.split("/")[-1]
         dn = z.split("-")[0]
-        print(path + dn)
         if not isfile(path + dn):
             chdir(path)
             if debug:

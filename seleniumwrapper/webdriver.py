@@ -1,5 +1,6 @@
 from selenium import webdriver as web
-from seleniumwrapper import Loader, Configuration
+from .configuration import Configuration
+from .loader import Loader
 
 
 class WebDriver(object):
