@@ -1,52 +1,20 @@
-from sys import argv
 from user_agent import generate_navigator_js
-from os import getcwd
 
 
 class Configuration(object):
     headless = True
-    driver = "chrome"
-    executable_path = getcwd() + "/" + "driver/chromedriver"
-    user_agent = generate_navigator_js()
+    driver = None
+    executable_path = None
+    user_agent = None
+    debug = False
+    binary = None
 
-    @staticmethod
-    def help():
-        print("usage: python3 Informer.py {arguments}")
-        print("\t-h\t--help")
-        print("\t-d\t--driver\tsets the webdriver")
-        print("\t\tdefault: chrome")
-        print("\t\tpossible arguments: chrome, c, firefox, f")
-        print("\t-e\t--executable-path\tpath to driver")
-        print("\t\tdefault:", Configuration.executable_path)
-        print("\t--headless\trun browser headless")
-        print("\t\tpossible arguments: none")
-        print("\t-u\t--user-agent\tuser-agent to use")
-        print("\t\tdefault: random js navigator")
-        exit()
-
-    class UnexpectedArgumentException(Exception):
-        pass
-
-    def __init__(self, **kwargs):
-        for k in kwargs.keys():
-            if k in ["headless", "driver", "executable_path"]:
-                self.__dict__["k"] = kwargs.get(k)
-            else:
-                raise Configuration.UnexpectedArgumentException("configuration has no variable '", k, "'")
-
-    @staticmethod
-    def parse():
-        i = 0
-        c = Configuration()
-        while i < len(argv):
-            a = argv[i]
-            if a in ["-h", "--help"]:
-                Configuration.help()
-            elif a in ["-d", "--driver"]:
-                c.driver = argv[i + 1]
-            elif a in ["--headless"]:
-                c.headless = True
-            elif a in ["-u", "--user-agent"]:
-                c.user_agent = argv[i + 1]
-            i += 1
-        return c
+    def __init__(self, driver="firefox", executable_path="driver/geckodriver",
+                 user_agent=generate_navigator_js()["userAgent"], headless=True, debug=False,
+                 binary="/usr/bin/firefox"):
+        self.driver = driver
+        self.executable_path = executable_path
+        self.user_agent = user_agent
+        self.headless = headless
+        self.debug = debug
+        self.binary = binary

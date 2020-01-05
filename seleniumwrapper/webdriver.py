@@ -1,21 +1,32 @@
 from selenium import webdriver as web
+from seleniumwrapper.loader import Loader
 
 
 class WebDriver(object):
     FIREFOX_DRIVER_NAMES = ["f", "firefox"]
-    CHROME_DRIVER_NAMES = ["c", "chrome"]
+    CHROME_DRIVER_NAMES = ["c", "chrom", "chromium"]
 
     @staticmethod
     def build(cfg):
-        d = None
-        o = None
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
             d = web.Firefox
             o = web.FirefoxOptions()
+            p = web.FirefoxProfile()
+            p.set_preference("general.useragent.override", cfg.user_agent)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             d = web.Chrome
             o = web.ChromeOptions()
+            o.add_argument("user-agent={0}".format(cfg.user_agent))
+            p = None
+        else:
+            raise NotImplementedError
 
+        Loader.fetch(cfg.executable_path, cfg.debug, cfg.driver)
+
+        o.binary_location = cfg.executable_path
         o.headless = cfg.headless
-        o.add_argument("user_agent=%s" % cfg.user_agent)
-        return d(cfg.executable_path, options=o)
+
+        if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
+            return d(p, options=o, firefox_binary=cfg.binary)
+        elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
+            return d(options=o)
