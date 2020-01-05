@@ -1,4 +1,4 @@
-from selenium import webdriver as web
+from seleniumwire import webdriver as web
 from .configuration import Configuration
 from .loader import Loader
 
