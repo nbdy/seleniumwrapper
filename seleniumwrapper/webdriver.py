@@ -1,10 +1,14 @@
 from selenium import webdriver as web
-from seleniumwrapper.loader import Loader
+from seleniumwrapper import Loader, Configuration
 
 
 class WebDriver(object):
     FIREFOX_DRIVER_NAMES = ["f", "firefox"]
     CHROME_DRIVER_NAMES = ["c", "chrom", "chromium"]
+
+    @staticmethod
+    def get_default():
+        return WebDriver.build(Configuration())
 
     @staticmethod
     def build(cfg):
