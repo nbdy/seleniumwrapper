@@ -1,6 +1,7 @@
 from seleniumwire import webdriver as web
 from .configuration import Configuration
 from .loader import Loader
+from os.path import isfile, abspath
 
 
 class WebDriver(object):
@@ -13,6 +14,9 @@ class WebDriver(object):
 
     @staticmethod
     def build(cfg):
+        if not isfile(cfg.executable_path):
+            Loader.fetch(cfg.executable_path, cfg.debug, cfg.driver)
+
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
             d = web.Firefox
             o = web.FirefoxOptions()
@@ -26,12 +30,10 @@ class WebDriver(object):
         else:
             raise NotImplementedError
 
-        Loader.fetch(cfg.executable_path, cfg.debug, cfg.driver)
-
-        o.binary_location = cfg.executable_path
+        o.binary_location = abspath(cfg.executable_path)
         o.headless = cfg.headless
 
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
-            return d(p, options=o, firefox_binary=cfg.binary)
+            return d(p, options=o, firefox_binary=cfg.binary, executable_path=cfg.executable_path)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             return d(options=o)
