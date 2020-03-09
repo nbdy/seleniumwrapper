@@ -1,4 +1,4 @@
-from seleniumwire import webdriver as web
+from selenium.webdriver import Firefox, FirefoxProfile, FirefoxOptions, Chrome, ChromeOptions
 from .configuration import Configuration
 from .loader import Loader
 
@@ -14,9 +14,9 @@ class WebDriver(object):
     @staticmethod
     def build(cfg, fetch_driver=True):
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
-            d = web.Firefox
-            o = web.FirefoxOptions()
-            p = web.FirefoxProfile()
+            d = Firefox
+            o = FirefoxOptions()
+            p = FirefoxProfile()
             p.set_preference("general.useragent.override", cfg.user_agent)
             if cfg.proxy is not None:
                 p.set_preference("network.proxy.type", 1)
@@ -26,8 +26,8 @@ class WebDriver(object):
                 p.set_preference("network.proxy.socks_port", cfg.proxy.port)
                 p.update_preferences()
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
-            d = web.Chrome
-            o = web.ChromeOptions()
+            d = Chrome
+            o = ChromeOptions()
             o.add_argument("user-agent={0}".format(cfg.user_agent))
             if cfg.proxy is not None:
                 o.add_argument("--proxy-server={0}".format(cfg.proxy.for_chrome()))
@@ -45,6 +45,3 @@ class WebDriver(object):
             return d(p, options=o, firefox_binary=cfg.binary)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             return d(options=o)
-
-        web.Firefox()
-        web.Chrome()

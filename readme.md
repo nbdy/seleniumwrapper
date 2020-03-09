@@ -1,16 +1,13 @@
 ### seleniumwrapper
 [![Build Status](http://build.eberlein.io:8080/job/python_seleniumwrapper/badge/icon)](http://build.eberlein.io:8080/job/python_seleniumwrapper/)<br>
 
+unix only!
 #### supports:
 - firefox
-- chrome(ium)
-
+- chrome(ium) (kinda)
 
 downloads drivers<br>
-and offers an easier interface<br>
-uses [selenim-wire](https://github.com/wkeeling/selenium-wire) under the hood<br>
-so there are more features<br>
-for example: overwriting headers
+and offers an easier interface<b>
 ```python
 from seleniumwrapper import WebDriver
 d = WebDriver.get_default()  # downloads webdriver
