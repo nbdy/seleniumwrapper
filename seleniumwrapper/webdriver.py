@@ -19,12 +19,7 @@ class WebDriver(object):
             p = FirefoxProfile()
             p.set_preference("general.useragent.override", cfg.user_agent)
             if cfg.proxy is not None:
-                p.set_preference("network.proxy.type", 1)
-                p.set_preference("network.proxy.socks_version", cfg.proxy.version)
-                p.set_preference("network.proxy.socks_remote_dns", True)
-                p.set_preference("network.proxy.socks", cfg.proxy.host)
-                p.set_preference("network.proxy.socks_port", cfg.proxy.port)
-                p.update_preferences()
+                p = cfg.proxy.set_proxy(p)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             d = Chrome
             o = ChromeOptions()
@@ -39,9 +34,15 @@ class WebDriver(object):
             Loader.fetch(cfg.executable_path, cfg.debug, cfg.driver)
 
         o.binary_location = cfg.executable_path
-        o.set_headless(cfg.headless)
+        o.headless = cfg.headless
 
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
-            return d(p, options=o, firefox_binary=cfg.binary)
+            if cfg.proxy is None:
+                return d(p, options=o, firefox_binary=cfg.binary)
+            else:
+                return d(p, options=o, firefox_binary=cfg.binary, proxy=cfg.proxy)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
-            return d(options=o)
+            if cfg.proxy is None:
+                return d(options=o)
+            else:
+                return d(options=o, proxy=cfg.proxy)

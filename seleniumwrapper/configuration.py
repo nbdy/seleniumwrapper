@@ -12,26 +12,46 @@ class Proxy(object):
     host = None
     port = None
     version = None
+    remote_dns = False
 
-    def __init__(self, type, host, port, version):
-        self.type = type
+    def __init__(self, _type, host, port, version, remote_dns):
+        self.type = _type
         self.host = host
         self.port = port
         self.version = version
+        self.remote_dns = remote_dns
 
     @staticmethod
-    def socks(host, port, version=5):
-        return Proxy(ProxyTypes.SOCKS, host, port, version)
+    def socks(host, port, version=5, remote_dns=True):
+        return Proxy(ProxyTypes.SOCKS, host, port, version, remote_dns)
 
-    def set_proxy(self, proxy_obj):
-        addr = "{0}:{1}".format(self.host, self.port)
+    @staticmethod
+    def https(host, port):
+        return Proxy(ProxyTypes.SSL, host, port, None, None)
+
+    @staticmethod
+    def ssl(host, port):
+        return Proxy.https(host, port)
+
+    @staticmethod
+    def http(host, port):
+        return Proxy(ProxyTypes.HTTP, host, port, None, None)
+
+    def set_proxy(self, profile):
+        prefix = "network.proxy."
+        profile.set_preference(prefix + ".type", 1)
         if self.type == ProxyTypes.SOCKS:
-            proxy_obj.socks_proxy = addr
+            profile.set_preference(prefix + ".socks", self.host)
+            profile.set_preference(prefix + ".socks_port", self.port)
+            if self.version is not None:
+                profile.set_preference(prefix + ".socks_version", self.version)
         elif self.type == ProxyTypes.HTTP:
-            proxy_obj.http_proxy = addr
+            profile.set_preference(prefix + ".http", self.host)
+            profile.set_preference(prefix + ".http_port", self.port)
         elif self.type == ProxyTypes.SSL:
-            proxy_obj.ssl_proxy = addr
-        return proxy_obj
+            profile.set_preference(prefix + ".ssl", self.host)
+            profile.set_preference(prefix + ".ssl_port", self.port)
+        return profile
 
     def for_chrome(self):
         addr = "{0}:{1}".format(self.host, self.port)

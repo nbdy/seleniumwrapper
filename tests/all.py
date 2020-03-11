@@ -16,7 +16,7 @@ d = WebDriver.build(c)
 check_output(d)
 '''
 
-c = Configuration(proxy=Proxy.socks("127.0.0.1", 19340))
+c = Configuration(proxy=Proxy.http("127.0.0.1", 33169))
 d = WebDriver.build(c)
 check_output(d)
 
