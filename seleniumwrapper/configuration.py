@@ -24,6 +24,15 @@ class IProxy(object):
         profile.update_preferences()
         return profile
 
+    def create_options(self):
+        return {
+            'proxy': {
+                'http': "http://{0}:{1}".format(self.host, self.http_port),
+                'https': "https://{0}:{1}".format(self.host, self.ssl_port),
+                'no_proxy': "localhost,127.0.0.1"
+            }
+        }
+
 
 class Configuration(object):
     headless = True

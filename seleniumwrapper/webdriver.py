@@ -1,4 +1,4 @@
-from selenium import webdriver
+from seleniumwire import webdriver
 from .configuration import Configuration
 from .loader import Loader
 
@@ -13,6 +13,10 @@ class WebDriver(object):
 
     @staticmethod
     def build(cfg, fetch_driver=True):
+        if cfg.proxy is not None:
+            options = cfg.proxy.create_options()
+        else:
+            options = {}
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
             d = webdriver.Firefox
             o = webdriver.FirefoxOptions()
@@ -43,9 +47,9 @@ class WebDriver(object):
             if cfg.proxy is None:
                 return d(p, cfg.binary, options=o)
             else:
-                return d(p, cfg.binary, options=o, proxy=cfg.proxy)
+                return d(p, cfg.binary, options=o, proxy=cfg.proxy, seleniumwire_options=options)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             if cfg.proxy is None:
                 return d(options=o)
             else:
-                return d(options=o, proxy=cfg.proxy)
+                return d(options=o, proxy=cfg.proxy, seleniumwire_options=options)

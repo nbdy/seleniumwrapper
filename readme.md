@@ -7,6 +7,7 @@ unix only!
 - chrome(ium) (kinda)
 
 downloads drivers<br>
+uses selenium-wire<br>
 and offers an easier interface<b>
 ```python
 from seleniumwrapper import WebDriver
