@@ -16,7 +16,10 @@ class WebDriver(object):
         if cfg.driver in WebDriver.FIREFOX_DRIVER_NAMES:
             d = webdriver.Firefox
             o = webdriver.FirefoxOptions()
-            p = webdriver.FirefoxProfile()
+            if cfg.profile is None:
+                p = webdriver.FirefoxProfile()
+            else:
+                p = webdriver.FirefoxProfile(cfg.profile)
             p.set_preference("general.useragent.override", cfg.user_agent)
             if cfg.proxy is not None:
                 p = cfg.proxy.update_preferences(p)

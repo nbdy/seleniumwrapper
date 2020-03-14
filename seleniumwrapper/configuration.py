@@ -33,10 +33,11 @@ class Configuration(object):
     debug = False
     binary = None
     proxy = None
+    profile = None
 
     def __init__(self, driver="firefox", executable_path="driver/geckodriver",
                  user_agent=generate_navigator_js()["userAgent"], headless=True, debug=False,
-                 binary="/usr/bin/firefox", proxy=None):
+                 binary="/usr/bin/firefox", proxy=None, profile=None):
         self.driver = driver
         self.executable_path = executable_path
         self.user_agent = user_agent
@@ -44,3 +45,4 @@ class Configuration(object):
         self.debug = debug
         self.binary = binary
         self.proxy = proxy
+        self.profile = profile
