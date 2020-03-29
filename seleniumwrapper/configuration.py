@@ -48,7 +48,9 @@ class IProxy(object):
                 'http': "http://{0}:{1}".format(self.host, self.http_port),
                 'https': "https://{0}:{1}".format(self.host, self.ssl_port),
                 'no_proxy': "localhost,127.0.0.1"
-            }
+            },
+            'verify_ssl': False,
+            'suppress_connection_errors': False
         }
 
 
