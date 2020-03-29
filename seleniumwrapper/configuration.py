@@ -26,6 +26,7 @@ class IProxy(object):
 
     def create_options(self):
         return {
+            'connection_timeout': 42,
             'proxy': {
                 'http': "http://{0}:{1}".format(self.host, self.http_port),
                 'https': "https://{0}:{1}".format(self.host, self.ssl_port),

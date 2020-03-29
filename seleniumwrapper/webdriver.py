@@ -25,10 +25,14 @@ class WebDriver(object):
             else:
                 p = webdriver.FirefoxProfile(cfg.profile)
             p.set_preference("general.useragent.override", cfg.user_agent)
+            if cfg.proxy is not None:
+                p = cfg.proxy.update_preferences(p)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             d = webdriver.Chrome
             o = webdriver.ChromeOptions()
             o.add_argument("user-agent={0}".format(cfg.user_agent))
+            if cfg.proxy is not None:
+                o.add_argument("--proxy-server={0}".format(cfg.proxy.for_chrome()))
             p = None
         else:
             raise NotImplementedError
@@ -43,7 +47,7 @@ class WebDriver(object):
             if cfg.proxy is None:
                 return d(p, cfg.binary, options=o)
             else:
-                return d(p, cfg.binary, options=o, seleniumwire_options=options)
+                return d(p, cfg.binary, options=o, proxy=cfg.proxy, seleniumwire_options=options)
         elif cfg.driver in WebDriver.CHROME_DRIVER_NAMES:
             if cfg.proxy is None:
                 return d(options=o)
