@@ -35,7 +35,7 @@ class WebDriver(object):
             NotSupportedError.throw(self.exe, self.get_version(), ', '.join(self.SUPPORTED_VERSIONS.keys()))
 
     @staticmethod
-    def decompress(fp, debug=False):  # decompression just works under linux currently
+    def decompress(fp, debug=False):  # decompression currently just works under linux
         if platform.startswith("win"):
             raise NotSupportedError.throw("windows", "", "none")
         dc = None

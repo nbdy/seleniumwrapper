@@ -9,10 +9,19 @@ class WebDriver(object):
 
     @staticmethod
     def get_default():
+        """
+        :return: a selenium-wire Webdriver object build with the default Configuration
+        """
         return WebDriver.build(Configuration())
 
     @staticmethod
     def build(cfg, fetch_driver=True):
+        """
+        builds a selenium-webdriver object with the specified configuration
+        :param cfg: Configuration object
+        :param fetch_driver: bool (default=True) fetches driver binaries
+        :return: selenium-wire Webdriver object
+        """
         if cfg.proxy is not None:
             options = cfg.proxy.create_options()
         else:
