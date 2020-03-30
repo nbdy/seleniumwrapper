@@ -35,6 +35,7 @@ class WebDriver(object):
             else:
                 p = webdriver.FirefoxProfile(cfg.profile)
             p.set_preference("general.useragent.override", cfg.user_agent)
+            p.set_preference("media.volume_scale", "0.0")
             '''
             if cfg.proxy is not None:
                 p = cfg.proxy.update_preferences(p)
