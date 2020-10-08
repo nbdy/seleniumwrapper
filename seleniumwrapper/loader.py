@@ -83,6 +83,10 @@ class Chrome(WebDriver):
     _78_0_3904_105 = "https://chromedriver.storage.googleapis.com/78.0.3904.105/chromedriver_%s.zip"
     _79_0_3945_36 = "https://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_%s.zip"
     _80_0_3987_16 = "https://chromedriver.storage.googleapis.com/80.0.3987.16/chromedriver_%s.zip"
+    _81_0_4044_138 = "https://chromedriver.storage.googleapis.com/81.0.4044.138/chromedriver_%s.zip"
+    _84_0_4147_30 = "https://chromedriver.storage.googleapis.com/84.0.4147.30/chromedriver_%s.zip"
+    _85_0_4183_83 = "https://chromedriver.storage.googleapis.com/85.0.4183.83/chromedriver_%s.zip"
+    _86_0_4240_22 = "https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_%s.zip"
 
     SUPPORTED_VERSIONS = {
         "79_0_3945_16": _79_0_3945_16,

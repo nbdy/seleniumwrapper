@@ -63,10 +63,11 @@ class Configuration(object):
     binary = None
     proxy = None
     profile = None
+    user_data_dir = None
 
     def __init__(self, driver="firefox", executable_path="driver/geckodriver",
                  user_agent=generate_navigator_js()["userAgent"], headless=True, debug=False,
-                 binary="/usr/bin/firefox", proxy=None, profile=None):
+                 binary="/usr/bin/firefox", proxy=None, profile=None, user_data_dir=None):
         """
         initializes Configuration object
         :param driver: str webdriver name (default=firefox)
@@ -77,6 +78,7 @@ class Configuration(object):
         :param binary: str path to browser binary (default=/usr/bin/firefox)
         :param proxy: IProxy object (default=None) optional
         :param profile: Profile name (default=None) optional
+        :param user_data_dir: User data directory (default=None) optional
         """
         self.driver = driver
         self.executable_path = executable_path
@@ -86,3 +88,4 @@ class Configuration(object):
         self.binary = binary
         self.proxy = proxy
         self.profile = profile
+        self.user_data_dir = user_data_dir

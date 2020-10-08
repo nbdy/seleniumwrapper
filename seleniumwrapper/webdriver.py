@@ -44,6 +44,8 @@ class WebDriver(object):
             d = webdriver.Chrome
             o = webdriver.ChromeOptions()
             o.add_argument("user-agent={0}".format(cfg.user_agent))
+            if cfg.user_data_dir:
+                o.add_argument("user-data-dir={0}".format(cfg.user_data_dir))
             '''
             if cfg.proxy is not None:
                 o.add_argument("--proxy-server={0}".format(cfg.proxy.for_chrome()))
